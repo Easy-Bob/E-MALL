@@ -7,6 +7,14 @@ spring:
         username: root
         password: 123456
         driver-class-name: com.mysql.cj.jdbc.Driver
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 3.150.39.20:8848
+                ip: 168.4.86.146 # public local net, needs to be modified constantly
+                port: 8040
+    application:
+        name: mall-product
 
 mybatis-plus:
     mapper-locations: classpath*:/mapper/**/*.xml
