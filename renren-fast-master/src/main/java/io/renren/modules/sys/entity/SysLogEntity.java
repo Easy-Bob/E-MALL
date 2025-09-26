@@ -11,6 +11,8 @@ package io.renren.modules.sys.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,8 +23,8 @@ import java.util.Date;
  *
  * @author Mark sunlightcs@gmail.com
  */
-@Data
 @TableName("sys_log")
+@Data
 public class SysLogEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@TableId

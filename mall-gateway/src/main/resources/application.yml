@@ -1,0 +1,29 @@
+server:
+  port: 8070
+
+spring:
+  application:
+    name: mall-gateway
+#  main:
+#    web-application-type: reactive
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 3.150.39.20:8848
+        ip: 168.4.86.146 # public local net, needs to be modified constantly
+        port: 8070
+    gateway:
+      routes:
+        - id: product_route
+          uri: lb://mall-product
+          predicates:
+            - Path=/renren-fast/product/**
+          filters:
+            - RewritePath=/renren-fast/(?<segment>/?.*), /$\{segment}
+        - id: app_route
+          uri: lb://renren-fast
+          predicates:
+            - Path=/renren-fast/**
+          filters:
+            - RewritePath=/renren-fast/(?<segment>/?.*), /renren-fast/$\{segment}
+
