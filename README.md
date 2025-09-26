@@ -1,4 +1,5 @@
 A Distributed High-performance E-Commerce Platform.
+
 Front-end: Based on renren-fast-vue-master(VUE)
 Back-end: renren-fast-master
           Spring Boot 2.6.x
