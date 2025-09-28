@@ -2,6 +2,8 @@ server:
     port: 8040
 
 spring:
+    main:
+        allow-circular-references: true
     datasource:
         url: jdbc:mysql://3.150.39.20:3306/mall-pms?useSSL=false&serverTimezone=UTC
         username: root
