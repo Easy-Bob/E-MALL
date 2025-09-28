@@ -4,6 +4,8 @@ import com.bob.common.utils.PageUtils;
 import com.bob.common.utils.Query;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -54,7 +56,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     private List<CategoryEntity> getCategoryChildrens(CategoryEntity categoryEntity
             , List<CategoryEntity> categoryEntities){
         List<CategoryEntity> collect = categoryEntities.stream().filter(entity -> {
-            return entity.getParentCid() == categoryEntity.getCatId();
+            return entity.getParentCid().equals(categoryEntity.getCatId());
         }).map(entity -> {
             entity.setChildrens(getCategoryChildrens(entity, categoryEntities));
             return entity;
@@ -65,4 +67,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
     }
 
+    @Override
+    public boolean removeByIds(Collection<? extends Serializable> idList) {
+        int res = baseMapper.deleteBatchIds(idList);
+        return res > 0;
+    }
 }

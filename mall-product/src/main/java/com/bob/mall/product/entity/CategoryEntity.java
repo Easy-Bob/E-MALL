@@ -2,6 +2,7 @@ package com.bob.mall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
@@ -9,6 +10,8 @@ import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * 
@@ -30,6 +33,7 @@ public class CategoryEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@NotBlank
 	private String name;
 	/**
 	 * 
@@ -40,8 +44,9 @@ public class CategoryEntity implements Serializable {
 	 */
 	private Integer catLevel;
 	/**
-	 * 
+	 * 0: not diplay; 1: display
 	 */
+	@TableLogic(value = "1", delval = "0")
 	private Integer showStatus;
 	/**
 	 * 

@@ -39,6 +39,7 @@ public class CategoryController {
         return R.ok().put("page", page);
     }
 
+
     @GetMapping("/listTree")
     //@RequiresPermissions("product:category:list")
     public R listTree(@RequestParam Map<String, Object> params){
@@ -84,7 +85,7 @@ public class CategoryController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
     //@RequiresPermissions("product:category:delete")
     public R delete(@RequestBody Long[] catIds){
 		categoryService.removeByIds(Arrays.asList(catIds));

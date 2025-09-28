@@ -11,8 +11,15 @@ spring:
         nacos:
             discovery:
                 server-addr: 3.150.39.20:8848
-                ip: 168.4.86.146 # public local net, needs to be modified constantly
+                ip: 168.4.77.36 # public local net, needs to be modified constantly
                 port: 8040
+        aws:
+            region:
+                static: us-east-2
+            credentials:
+                access-key: AKIA3B6DKZEMGL3ROB3M
+                secret-key: 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
+
     application:
         name: mall-product
 
@@ -21,4 +28,7 @@ mybatis-plus:
     global-config:
         db-config:
             id-type: auto
+            logic-delete-value: 1
+            logic-not-delete-value: 0
+
 

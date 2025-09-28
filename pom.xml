@@ -14,7 +14,7 @@
     <artifactId>mall-mall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>mall-mall</name>
-    <description>A high-performance e-commerce platform</description>
+    <description>A distributed high-performance e-commerce platform</description>
     <packaging>pom</packaging>
     <properties>
         <java.version>1.8</java.version>
@@ -22,6 +22,7 @@
     </properties>
 
     <modules>
+        <module>mall-third-party</module>
         <module>mall-gateway</module>
         <module>mall-ware</module>
         <module>mall-member</module>

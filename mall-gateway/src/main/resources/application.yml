@@ -10,20 +10,29 @@ spring:
     nacos:
       discovery:
         server-addr: 3.150.39.20:8848
-        ip: 168.4.86.146 # public local net, needs to be modified constantly
+        ip: 168.4.77.36 # public local net, needs to be modified constantly
         port: 8070
     gateway:
       routes:
+#         product
         - id: product_route
           uri: lb://mall-product
           predicates:
             - Path=/renren-fast/product/**
           filters:
             - RewritePath=/renren-fast/(?<segment>/?.*), /$\{segment}
+#          aws s3
+        - id: third_route
+          uri: lb://mall-third-party
+          predicates:
+            - Path=/renren-fast/third/**
+          filters:
+            - RewritePath=/renren-fast/(?<segment>/?.*), /$\{segment}
+
+        #         login
         - id: app_route
           uri: lb://renren-fast
           predicates:
             - Path=/renren-fast/**
           filters:
             - RewritePath=/renren-fast/(?<segment>/?.*), /renren-fast/$\{segment}
-

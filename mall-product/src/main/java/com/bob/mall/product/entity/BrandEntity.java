@@ -2,51 +2,57 @@ package com.bob.mall.product.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
+import org.hibernate.validator.constraints.URL;
 
-/**
- * Ʒ
- * 
- * @author bob
- * @email bsun3217@gmail.com
- * @date 2025-09-25 21:25:58
- */
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.io.Serializable;
+
 @Data
 @TableName("pms_brand")
 public class BrandEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Ʒ
+	 * 品牌id
 	 */
 	@TableId
 	private Long brandId;
 	/**
-	 * Ʒ
+	 * 品牌名
 	 */
+	//@NotEmpty
+	//@NotNull
+	@NotBlank(message = "品牌的名称不能为空")
 	private String name;
 	/**
-	 * Ʒ
+	 * 品牌logo地址
 	 */
+	@NotBlank(message = "logo不能为空")
+	@URL(message = "logo必须是一个合法URL地址")
 	private String logo;
 	/**
-	 * 
+	 * 介绍
 	 */
 	private String descript;
 	/**
-	 * 
+	 * 显示状态[0-不显示；1-显示]
 	 */
 	private Integer showStatus;
 	/**
-	 * 
+	 * 检索首字母
 	 */
+	@NotBlank(message = "检索首字母不能为空")
+	@Pattern(regexp = "/^[a-zA-Z]$/",message = "检索首字母必须是单个的字母")
 	private String firstLetter;
 	/**
-	 * 
+	 * 排序
 	 */
+	@NotNull(message = "排序不能为null")
+	@Min(value = 0,message = "排序不能小于0")
 	private Integer sort;
 
 }
