@@ -12,4 +12,5 @@ Back-end:
           Spring Cloud Nacos Config
           
           MyBatis Plus 3.x (MySQL entity generated via renren-fast-generator)
-          
+
+          AWS: EC2, S3
