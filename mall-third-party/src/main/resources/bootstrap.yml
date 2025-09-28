@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: mall-third-party
+  cloud:
+    nacos:
+      config:
+        server-addr: 3.150.39.20:8848
+        namespace: 53326b0b-bbd6-4855-9005-0a5fa8e48087
+        file-extension: yaml
+#        group: prod
