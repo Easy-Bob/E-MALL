@@ -2,6 +2,8 @@ server:
     port: 8040
 
 spring:
+    main:
+        allow-circular-references: true
     datasource:
         url: jdbc:mysql://3.150.39.20:3306/mall-pms?useSSL=false&serverTimezone=UTC
         username: root
@@ -11,14 +13,14 @@ spring:
         nacos:
             discovery:
                 server-addr: 3.150.39.20:8848
-                ip: 168.4.77.36 # public local net, needs to be modified constantly
+                ip: 168.4.75.127 # public local net, needs to be modified constantly
                 port: 8040
         aws:
             region:
                 static: us-east-2
             credentials:
-                access-key: AKIA3B6DKZEMGL3ROB3M
-                secret-key: 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
+                access-key: AKIA3B6DKZEMJASA7D4S
+                secret-key: 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
             s3:
                 bucket: e-mall-files
     application:
