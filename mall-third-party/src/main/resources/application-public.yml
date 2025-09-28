@@ -17,8 +17,8 @@ spring:
             region:
                 static: us-east-2
             credentials:
-                access-key: AKIA3B6DKZEMGL3ROB3M
-                secret-key: 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
+                access-key: --
+                secret-key: --
             s3:
                 bucket: e-mall-files
     application:
