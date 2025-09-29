@@ -11,7 +11,7 @@ spring:
         nacos:
             discovery:
                 server-addr: 3.150.39.20:8848
-                ip: 168.4.86.146 # public local net, needs to be modified constantly
+                ip: 168.5.60.208 # public local net, needs to be modified constantly
                 port: 8050
     application:
         name: mall-ware

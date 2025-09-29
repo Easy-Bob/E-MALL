@@ -14,6 +14,13 @@ spring:
         port: 8070
     gateway:
       routes:
+        #         ware
+        - id: ware_route
+          uri: lb://mall-ware
+          predicates:
+            - Path=/renren-fast/ware/**
+          filters:
+            - RewritePath=/renren-fast/(?<segment>/?.*), /$\{segment}
         #         member
         - id: member_route
           uri: lb://mall-member
