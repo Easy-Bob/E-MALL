@@ -2,11 +2,18 @@ package com.bob.mall.product.service.impl;
 
 import com.bob.common.utils.PageUtils;
 import com.bob.common.utils.Query;
+import com.bob.mall.product.entity.AttrEntity;
 import com.bob.mall.product.entity.CategoryEntity;
+import com.bob.mall.product.service.AttrService;
+import com.bob.mall.product.vo.AttrGroupWithAttrsVo;
+import com.bob.mall.product.vo.AttrVO;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -20,6 +27,9 @@ import com.bob.mall.product.service.AttrGroupService;
 
 @Service("attrGroupService")
 public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEntity> implements AttrGroupService {
+
+    @Autowired
+    private AttrService attrService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -58,6 +68,19 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
         IPage<AttrGroupEntity> page = this.page(new Query<AttrGroupEntity>()
                 .getPage(params), wrapper);
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<AttrGroupWithAttrsVo> getAttrgroupWIthAttrsByCatelogId(Long catelogId) {
+        List<AttrGroupEntity> attrGroups = this.list(new QueryWrapper<AttrGroupEntity>().eq("catelog_id", catelogId));
+        List<AttrGroupWithAttrsVo> list = attrGroups.stream().map((group) -> {
+            AttrGroupWithAttrsVo vo = new AttrGroupWithAttrsVo();
+            BeanUtils.copyProperties(group, vo);
+            List<AttrEntity> attrEntities = attrService.getRelationAttr(group.getAttrGroupId());
+            vo.setAttrs(attrEntities);
+            return vo;
+        }).collect(Collectors.toList());
+        return list;
     }
 
 

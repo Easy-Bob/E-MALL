@@ -18,6 +18,7 @@ import java.util.Map;
  *
  * @author Mark sunlightcs@gmail.com
  */
+
 public class R extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
 	
@@ -61,4 +62,10 @@ public class R extends HashMap<String, Object> {
 		super.put(key, value);
 		return this;
 	}
+
+	public Integer getCode(){
+		return (Integer) (this.get("code"));
+	}
+
+
 }

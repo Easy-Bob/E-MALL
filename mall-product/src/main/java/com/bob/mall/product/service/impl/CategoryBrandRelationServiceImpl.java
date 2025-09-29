@@ -9,6 +9,8 @@ import com.bob.mall.product.service.BrandService;
 import com.bob.mall.product.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -28,6 +30,10 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
 
     @Autowired
     private BrandService brandService;
+
+    @Autowired
+    private CategoryBrandRelationDao categoryBrandRelationDao;
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<CategoryBrandRelationEntity> page = this.page(
@@ -58,6 +64,13 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
         entity.setBrandName(name);
         this.update(entity, new UpdateWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandId));
 
+    }
+
+    @Override
+    public List<CategoryBrandRelationEntity> categoryBrandRelation(Long catId) {
+        List<CategoryBrandRelationEntity> list = categoryBrandRelationDao
+                .selectList(new QueryWrapper<CategoryBrandRelationEntity>().eq("catelog_id", catId));
+        return list;
     }
 
     @Override

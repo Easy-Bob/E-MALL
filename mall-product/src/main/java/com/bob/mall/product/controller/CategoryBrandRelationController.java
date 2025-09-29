@@ -7,11 +7,7 @@ import java.util.Map;
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.bob.mall.product.entity.CategoryBrandRelationEntity;
 import com.bob.mall.product.service.CategoryBrandRelationService;
@@ -94,6 +90,12 @@ public class CategoryBrandRelationController {
 		categoryBrandRelationService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
+    }
+
+    @GetMapping("/brands/list")
+    public R categoryBrandRelation(@RequestParam(value = "catId", required = true, defaultValue = "0") Long catId){
+        List<CategoryBrandRelationEntity> list = categoryBrandRelationService.categoryBrandRelation(catId);
+        return R.ok().put("data", list);
     }
 
 }
