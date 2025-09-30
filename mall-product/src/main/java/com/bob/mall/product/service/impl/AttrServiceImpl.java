@@ -6,9 +6,7 @@ import com.bob.common.utils.PageUtils;
 import com.bob.common.utils.Query;
 import com.bob.mall.product.dao.AttrAttrgroupRelationDao;
 import com.bob.mall.product.dao.AttrGroupDao;
-import com.bob.mall.product.entity.AttrAttrgroupRelationEntity;
-import com.bob.mall.product.entity.AttrGroupEntity;
-import com.bob.mall.product.entity.CategoryEntity;
+import com.bob.mall.product.entity.*;
 import com.bob.mall.product.service.AttrAttrgroupRelationService;
 import com.bob.mall.product.service.AttrGroupService;
 import com.bob.mall.product.service.CategoryService;
@@ -32,7 +30,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 
 import com.bob.mall.product.dao.AttrDao;
-import com.bob.mall.product.entity.AttrEntity;
 import com.bob.mall.product.service.AttrService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -266,4 +263,15 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
         return new PageUtils(page);
     }
+
+    @Override
+    public List<Long> selectSearchAttrIds(List<Long> attrIds) {
+        List<AttrEntity> list = this.list(new QueryWrapper<AttrEntity>().in("attr_id", attrIds).eq("search_type", 1));
+        return list.stream().map(item->{
+            return item.getAttrId();
+        }).collect(Collectors.toList());
+    }
+
+
+
 }

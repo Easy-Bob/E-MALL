@@ -11,6 +11,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="mall-coupon" />
         <module name="mall-ware" />
+        <module name="mall-search" />
         <module name="mall-third-party" />
         <module name="renren-fast" />
         <module name="mall-order" />
@@ -25,6 +26,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mall-search" options="" />
       <module name="renren-fast" options="" />
       <module name="renren-generator" options="" />
     </option>

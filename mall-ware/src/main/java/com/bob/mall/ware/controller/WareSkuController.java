@@ -1,9 +1,11 @@
 package com.bob.mall.ware.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.bob.common.dto.SkuHasStockDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +31,17 @@ import com.bob.common.utils.*;
 public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
+
+    /**
+     * 查询对应的skuId是否有库存
+     * @param skuIds
+     * @return
+     */
+    @RequestMapping("/hasStock")
+    public List<SkuHasStockDto> getSkusHasStock(@RequestBody List<Long> skuIds){
+        List<SkuHasStockDto> list = wareSkuService.getSkusHasStock(skuIds);
+        return list;
+    }
 
     /**
      * 列表

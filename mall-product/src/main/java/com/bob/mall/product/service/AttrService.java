@@ -3,6 +3,7 @@ package com.bob.mall.product.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bob.common.utils.PageUtils;
 import com.bob.mall.product.entity.AttrEntity;
+import com.bob.mall.product.entity.ProductAttrValueEntity;
 import com.bob.mall.product.vo.AttrGroupRelationVO;
 import com.bob.mall.product.vo.AttrResponseVo;
 import com.bob.mall.product.vo.AttrVO;
@@ -36,5 +37,8 @@ public interface AttrService extends IService<AttrEntity> {
     void removeByIdsDetail(Long[] attrIds);
 
     PageUtils getNoAttrRelation(Map<String, Object> params, Long attrgroupId);
+
+
+    List<Long> selectSearchAttrIds(List<Long> attrIds);
 }
 

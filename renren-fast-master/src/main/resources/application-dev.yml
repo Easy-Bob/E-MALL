@@ -6,7 +6,7 @@ spring:
         nacos:
             discovery:
                 server-addr: 3.150.39.20:8848
-                ip: 168.5.60.208 # public local net, needs to be modified constantly
+                ip: 168.5.59.205 # public local net, needs to be modified constantly
                 port: 8060
     application:
         name: renren-fast

@@ -22,6 +22,7 @@
     </properties>
 
     <modules>
+        <module>mall-search</module>
         <module>mall-third-party</module>
         <module>mall-gateway</module>
         <module>mall-ware</module>

@@ -1,9 +1,11 @@
 package com.bob.mall.ware.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.bob.common.dto.SkuHasStockDto;
 import com.bob.common.utils.PageUtils;
 import com.bob.mall.ware.entity.WareSkuEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,5 +21,6 @@ public interface WareSkuService extends IService<WareSkuEntity> {
 
     void addStock(Long skuId, Long wareId, Integer skuNum);
 
+    List<SkuHasStockDto> getSkusHasStock(List<Long> skuIds);
 }
 
