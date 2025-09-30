@@ -1,0 +1,6 @@
+D:\E-MALL\E-MALL-BOB\mall-search\src\main\java\com\bob\mall\search\constant\ESConstant.java
+D:\E-MALL\E-MALL-BOB\mall-search\src\main\java\com\bob\mall\search\controller\ElasticSearchSaveController.java
+D:\E-MALL\E-MALL-BOB\mall-search\src\main\java\com\bob\mall\search\MallSearchApplication.java
+D:\E-MALL\E-MALL-BOB\mall-search\src\main\java\com\bob\mall\search\service\ElasticSearchSaveService.java
+D:\E-MALL\E-MALL-BOB\mall-search\src\main\java\com\bob\mall\search\config\MallElasticSearchConfiguration.java
+D:\E-MALL\E-MALL-BOB\mall-search\src\main\java\com\bob\mall\search\service\impl\ElasticSearchSaveServiceImpl.java
