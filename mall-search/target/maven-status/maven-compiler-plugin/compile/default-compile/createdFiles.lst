@@ -1,0 +1,6 @@
+com\bob\mall\search\service\impl\ElasticSearchSaveServiceImpl.class
+com\bob\mall\search\controller\ElasticSearchSaveController.class
+com\bob\mall\search\config\MallElasticSearchConfiguration.class
+com\bob\mall\search\service\ElasticSearchSaveService.class
+com\bob\mall\search\constant\ESConstant.class
+com\bob\mall\search\MallSearchApplication.class
