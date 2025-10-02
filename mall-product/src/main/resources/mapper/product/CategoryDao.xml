@@ -16,5 +16,8 @@
         <result property="productCount" column="product_count"/>
     </resultMap>
 
+    <select id="queryLevelCategory" resultType="com.bob.mall.product.entity.CategoryEntity">
+        SELECT * FROM pms_category WHERE parent_cid = 0;
+    </select>
 
 </mapper>

@@ -1,10 +1,10 @@
 spring:
   application:
-    name: renren-fast
+    name: mall-product
   cloud:
     nacos:
       config:
         server-addr: 192.168.101.65:8848
-        namespace: bc220d1c-a4f6-467c-929d-547ac5e08b6f
+        namespace: faad4fcf-46d5-4355-bb68-3b8579ae5d39
         file-extension: yaml
 #        group: prod

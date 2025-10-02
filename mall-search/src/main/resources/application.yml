@@ -1,0 +1,19 @@
+server:
+    port: 8100
+
+spring:
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 192.168.101.65:8848
+#                ip: 168.5.59.205 # public local net, needs to be modified constantly
+                port: 8100
+    application:
+        name: mall-search
+    # Server 2 Client date format
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+
+
+
+
