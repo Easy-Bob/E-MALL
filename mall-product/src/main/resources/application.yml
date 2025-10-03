@@ -22,6 +22,16 @@ spring:
         date-format: yyyy-MM-dd HH:mm:ss
     thymeleaf:
         cache: false    # 关闭thymeleaf的缓存
+    redis:
+        host: 192.168.101.65
+        port: 6379
+    cache:
+        type: redis
+        redis:
+            time-to-live: 60000 # ms
+#            key-prefix: bob_
+            cache-null-values: true # avoid cache penetration
+
 mybatis-plus:
     mapper-locations: classpath*:/mapper/**/*.xml
     global-config:

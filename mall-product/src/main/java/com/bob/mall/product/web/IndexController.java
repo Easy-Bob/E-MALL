@@ -3,10 +3,13 @@ package com.bob.mall.product.web;
 import com.bob.mall.product.entity.CategoryEntity;
 import com.bob.mall.product.service.CategoryService;
 import com.bob.mall.product.vo.Catalog2VO;
+import org.redisson.api.RCountDownLatch;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -33,10 +36,6 @@ public class IndexController {
         return map;
     }
 
-    @ResponseBody
-    @GetMapping("/hello")
-    public String Hello(){
-        return "hello";
-    }
+
 
 }
