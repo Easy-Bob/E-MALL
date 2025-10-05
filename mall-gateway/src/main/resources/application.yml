@@ -55,3 +55,8 @@ spring:
           uri: lb://mall-product
           predicates:
             - Host=bob.mall.com
+
+        - id: bobmall_host_route
+          uri: lb://mall-search
+          predicates:
+            - Host=bob.search.com

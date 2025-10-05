@@ -22,7 +22,7 @@ public class MallElasticSearchConfiguration {
 
     @Bean
     public RestHighLevelClient restHighLevelClient(){
-        RestClientBuilder builder = RestClient.builder(new HttpHost("3.150.39.20", 9200, "http"));
+        RestClientBuilder builder = RestClient.builder(new HttpHost("192.168.101.65", 9200, "http"));
         RestHighLevelClient client = new RestHighLevelClient(builder);
         return client;
     }

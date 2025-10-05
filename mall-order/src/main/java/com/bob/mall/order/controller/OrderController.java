@@ -31,16 +31,16 @@ public class OrderController {
     @Autowired
     ProductService productService;
 
-    @Value("${user.userName}")
-    private String userName;
-
-    @Value("${user.age}")
-    private Integer age;
-
-    @GetMapping("/user")
-    public R queryUser(){
-        return R.ok().put(userName, age);
-    }
+//    @Value("${user.userName}")
+//    private String userName;
+//
+//    @Value("${user.age}")
+//    private Integer age;
+//
+//    @GetMapping("/user")
+//    public R queryUser(){
+//        return R.ok().put(userName, age);
+//    }
 
     @GetMapping("/products")
     public R queryProduct(){

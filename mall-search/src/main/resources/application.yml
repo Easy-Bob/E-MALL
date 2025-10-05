@@ -13,6 +13,8 @@ spring:
     # Server 2 Client date format
     jackson:
         date-format: yyyy-MM-dd HH:mm:ss
+    thymeleaf:
+        cache: false
 
 
 
