@@ -2,7 +2,10 @@ package com.bob.mall.product.service.impl;
 
 import com.bob.common.utils.PageUtils;
 import com.bob.common.utils.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -17,6 +20,9 @@ import com.bob.mall.product.service.SkuImagesService;
 @Service("skuImagesService")
 public class SkuImagesServiceImpl extends ServiceImpl<SkuImagesDao, SkuImagesEntity> implements SkuImagesService {
 
+    @Autowired
+    private SkuImagesDao skuImagesDao;
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<SkuImagesEntity> page = this.page(
@@ -25,6 +31,12 @@ public class SkuImagesServiceImpl extends ServiceImpl<SkuImagesDao, SkuImagesEnt
         );
 
         return new PageUtils(page);
+    }
+
+    @Override
+    public List<SkuImagesEntity> getImagesBySkuId(Long skuId) {
+        List<SkuImagesEntity> skuImagesEntityList = skuImagesDao.selectList(new QueryWrapper<SkuImagesEntity>().eq("sku_id", skuId));
+        return skuImagesEntityList;
     }
 
 }
