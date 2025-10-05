@@ -1,16 +1,46 @@
-A Distributed High-performance E-Commerce Platform.
+## A Distributed High-performance E-Commerce Platform
 
-Front-end: 
-          Based on renren-fast-vue-master(VUE)
-Back-end: 
-          renren-fast-master
-          Spring Boot 2.6.x
-          Spring Cloud 2020.0.x
-          Spring Cloud Alibaba 2021.0.x
-          
-          Spring Cloud Nacos
-          Spring Cloud Nacos Config
-          
-          MyBatis Plus 3.x (MySQL entity generated via renren-fast-generator)
+### Architecture
 
-          AWS: EC2, S3
+![](images\emall architecture.png)
+
+#### Front-end:
+
+​	 VUE: Based on renren-fast-vue-master
+
+​	Thymeleaf: Page Rendering
+
+#### Routing & Gateway:
+
+​	Nginx
+
+​	Spring Cloud Alibaba GateWay
+
+​	Spring Cloud Alibaba Nacos
+
+#### Back-end:
+
+​	renren-fast-master: (Info(product, ware, user) Management)
+
+​	Spring Boot 2.x
+
+​	Spring Cloud(Alibaba) 2021.x: OpenFeign ...
+
+​	Spring Security
+
+​	MyBatis Plus 3.x(MySQL Manipulation Tool)
+
+#### DataBase:
+
+​	MySQL
+
+​	Redis
+
+​	ElasticSearch(& Kibana)
+
+#### DevOps & Cloud:
+
+​	Docker
+
+​	AWS: EC2, S3        
+
