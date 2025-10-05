@@ -50,5 +50,7 @@
 
 [msb_25818/mca-project-mall: 从0到1商城系统 - mca-project-mall - 马士兵教育代码仓库](https://git.mashibing.com/msb_25818/mca-project-mall/src/branch/master)
 
+###### (This repository is for educational purposes only. If any content infringes on your rights, please contact me to have it removed.)
+
 
 
