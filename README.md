@@ -2,7 +2,7 @@
 
 ### Architecture
 
-![](images\emall architecture.png)
+![E-MALL Architecture](images/emall architecture.png)
 
 #### Front-end:
 
