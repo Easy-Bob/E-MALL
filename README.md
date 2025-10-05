@@ -42,5 +42,13 @@
 
 ​	Docker
 
-​	AWS: EC2, S3        
+​	AWS: EC2, S3      
+
+
+
+#### Reference:
+
+[msb_25818/mca-project-mall: 从0到1商城系统 - mca-project-mall - 马士兵教育代码仓库](https://git.mashibing.com/msb_25818/mca-project-mall/src/branch/master)
+
+
 
