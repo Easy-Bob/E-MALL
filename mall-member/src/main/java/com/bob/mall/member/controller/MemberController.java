@@ -4,12 +4,11 @@ import java.util.Arrays;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.bob.common.exception.BizCodeEnume;
+import com.bob.mall.member.vo.MemberLoginVO;
+import com.bob.mall.member.vo.SocialUserVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.bob.mall.member.entity.MemberEntity;
 import com.bob.mall.member.service.MemberService;
@@ -29,6 +28,29 @@ import com.bob.common.utils.*;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
+    @RequestMapping("/login")
+    public R login(@RequestBody MemberLoginVO vo){
+        MemberEntity entity = memberService.login(vo);
+        if(entity != null){
+            return R.ok();
+        }
+
+        return R.error(BizCodeEnume.USERNAME_PHONE_VALID_EXCEPTION.getCode(),
+                BizCodeEnume.USERNAME_PHONE_VALID_EXCEPTION.getMsg());
+    }
+
+    @RequestMapping("/sociallogin")
+    public R socialLogin(@RequestBody SocialUserVO vo){
+        MemberEntity entity = memberService.sociallogin(vo);
+        if(entity != null){
+            return R.ok();
+        }
+
+        return R.error(BizCodeEnume.USERNAME_PHONE_VALID_EXCEPTION.getCode(),
+                BizCodeEnume.USERNAME_PHONE_VALID_EXCEPTION.getMsg());
+    }
+
 
     /**
      * 列表

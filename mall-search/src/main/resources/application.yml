@@ -1,6 +1,9 @@
 server:
     port: 8100
-
+    servlet:
+        session:
+            cookie:
+                domain: .bob.com    # ← note the leading dot
 spring:
     cloud:
         nacos:

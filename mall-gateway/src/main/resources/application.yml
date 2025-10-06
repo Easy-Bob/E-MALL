@@ -54,12 +54,16 @@ spring:
         - id: bobmall_host_route
           uri: lb://mall-product
           predicates:
-            - Host=bob.mall.com
+            - Host=mall.bob.com
         - id: bobmall_host_route2
           uri: lb://mall-search
           predicates:
-            - Host=bob.search.com
+            - Host=search.bob.com
         - id: bobmall_host_route3
           uri: lb://mall-product
           predicates:
-            - Host=bob.item.com
+            - Host=item.bob.com
+        - id: bobmall_host_route4
+          uri: lb://mall-auth
+          predicates:
+            - Host=auth.bob.com

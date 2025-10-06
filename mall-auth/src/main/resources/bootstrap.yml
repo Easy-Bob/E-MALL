@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: mall-auth
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.101.65:8848
+        namespace: cfee6b82-2a0b-4f68-8653-3dbaf1c6f67b
+        file-extension: yaml
+#        group: prod
