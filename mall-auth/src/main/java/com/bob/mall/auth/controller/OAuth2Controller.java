@@ -2,8 +2,10 @@ package com.bob.mall.auth.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.bob.common.constant.AuthConstant;
 import com.bob.common.utils.HttpUtils;
 import com.bob.common.utils.R;
+import com.bob.common.vo.MemberVO;
 import com.bob.mall.auth.feign.MemberFeignService;
 import com.bob.mall.auth.vo.SocialUser;
 import org.apache.http.HttpResponse;
@@ -13,7 +15,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import vo.MemberVO;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
@@ -83,7 +84,9 @@ public class OAuth2Controller {
             return "redirect:http://auth.bob.com/login.html";
         }
 //        System.out.println(socialUser);
-        session.setAttribute("loginUser", socialUser.getName());
+        MemberVO vo = new MemberVO();
+        vo.setUsername(socialUser.getName());
+        session.setAttribute(AuthConstant.AUTH_SESSION_REDIS, vo);
 
         return "redirect:http://mall.bob.com";
     }

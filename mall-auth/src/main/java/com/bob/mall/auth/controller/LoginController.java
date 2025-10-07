@@ -1,6 +1,8 @@
 package com.bob.mall.auth.controller;
 
+import com.bob.common.constant.AuthConstant;
 import com.bob.common.utils.R;
+import com.bob.common.vo.MemberVO;
 import com.bob.mall.auth.feign.MemberFeignService;
 import com.bob.mall.auth.vo.LoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +24,10 @@ public class LoginController {
                         HttpSession session){
         R r = memberFeginService.login(loginVo);
         if(r.getCode() == 0){
+            MemberVO memberVO = new MemberVO();
+            memberVO.setUsername("bob_user");
             // 表示登录成功
-            session.setAttribute("loginUser", "bob_user");
+            session.setAttribute(AuthConstant.AUTH_SESSION_REDIS, memberVO);
             return "redirect:http://mall.bob.com";
         }
 

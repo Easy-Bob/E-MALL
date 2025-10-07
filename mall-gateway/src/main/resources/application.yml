@@ -67,3 +67,7 @@ spring:
           uri: lb://mall-auth
           predicates:
             - Host=auth.bob.com
+        - id: bobmall_host_route5
+          uri: lb://mall-cart
+          predicates:
+            - Host=cart.bob.com

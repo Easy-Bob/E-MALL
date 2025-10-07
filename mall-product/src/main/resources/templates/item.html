@@ -57,7 +57,7 @@
                 </li>
             </ul>
             <ul class="header_ul_right">
-                <li style="border: 0;"><a href=http://auth.bob.com/login.html" class="aa">你好，请登录</a></li>
+                <li style="border: 0;"><a href="http://auth.bob.com/login.html" class="aa">你好，请登录 [[${session.loginUser.username}]]</a></li>
                 <li><a href="http://auth.bob.com/reg.html" style="color: red;">免费注册</a> |</li>
                 <li><a href="/static/item/javascript:;" class="aa">我的订单</a> |</li>
                 <li class="jingdong"><a href="/static/item/javascript:;">我的京东</a><span class="glyphicon glyphicon-menu-down">|</span>
@@ -612,7 +612,7 @@
 
                 <div class="box-btns clear">
                     <div class="box-btns-one">
-                        <input type="text" name="" id="" value="1" />
+                        <input type="text" name="" id="numInput" value="1" />
                         <div class="box-btns-one1">
 
                             <div>
@@ -629,8 +629,8 @@
                         </div>
                     </div>
                     <div class="box-btns-two">
-                        <a href="/static/item/../商品分类\index.html">
-                            立即预约
+                        <a href="#" id="addCart" th:attr="skuId=${item.info.skuId}">
+                            Cart
                         </a>
                     </div>
                     <div class="box-btns-three">
@@ -663,42 +663,42 @@
         </div>
     </div>
     <!--欲约抢购流程-->
-    <div class="qianggoulioucheng">
-        <div class="lioucheng">
-            <h3>欲约抢购流程</h3>
-        </div>
-        <!--抢购步骤-->
-        <ul class="qianggoubuzhao">
-            <li>
-                <img src="/static/item/img/shop_03.png" />
-                <dl class="buzhou">
-                    <dt>1.等待预约</dt>
-                    <dl>预约即将开始</dl>
-                </dl>
-            </li>
-            <li>
-                <img src="/static/item/img/shop_04.png" />
-                <dl class="buzhou">
-                    <dt>2.预约中</dt>
-                    <dl>2017-11-15 10:35 2017-11-15 23:59</dl>
-                </dl>
-            </li>
-            <li>
-                <img src="/static/item/img/shop_05.png" />
-                <dl class="buzhou">
-                    <dt>3.等待抢购</dt>
-                    <dl>抢购即将开始</dl>
-                </dl>
-            </li>
-            <li>
-                <img src="/static/item/img/shop_06.png" />
-                <dl class="buzhou">
-                    <dt>4.抢购中</dt>
-                    <dl></dl>
-                </dl>
-            </li>
-        </ul>
-    </div>
+<!--    <div class="qianggoulioucheng">-->
+<!--        <div class="lioucheng">-->
+<!--            <h3>欲约抢购流程</h3>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;抢购步骤&ndash;&gt;-->
+<!--        <ul class="qianggoubuzhao">-->
+<!--            <li>-->
+<!--                <img src="/static/item/img/shop_03.png" />-->
+<!--                <dl class="buzhou">-->
+<!--                    <dt>1.等待预约</dt>-->
+<!--                    <dl>预约即将开始</dl>-->
+<!--                </dl>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <img src="/static/item/img/shop_04.png" />-->
+<!--                <dl class="buzhou">-->
+<!--                    <dt>2.预约中</dt>-->
+<!--                    <dl>2017-11-15 10:35 2017-11-15 23:59</dl>-->
+<!--                </dl>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <img src="/static/item/img/shop_05.png" />-->
+<!--                <dl class="buzhou">-->
+<!--                    <dt>3.等待抢购</dt>-->
+<!--                    <dl>抢购即将开始</dl>-->
+<!--                </dl>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <img src="/static/item/img/shop_06.png" />-->
+<!--                <dl class="buzhou">-->
+<!--                    <dt>4.抢购中</dt>-->
+<!--                    <dl></dl>-->
+<!--                </dl>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
 
     <div class="ShopXiangqing">
         <div class="allLeft">
@@ -1466,6 +1466,11 @@
 <script src="/static/item/js/jquery1.9.js" type="text/javascript" charset="utf-8"></script>
 <script src="/static/item/js/js.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
+    $("#addCart").click(function (){
+        var num = $("#numInput").val();
+        var skuId = $(this).attr("skuId");
+        location.href = "http://cart.bob.com/addCart?skuId=" + skuId + "&num=" + num;
+    });
 </script>
 
 </html>

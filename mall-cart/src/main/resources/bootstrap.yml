@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: mall-cart
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.101.65:8848
+        namespace: 9eb30606-16cc-4783-8348-5255b556a186
+        file-extension: yaml
+

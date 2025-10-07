@@ -1,15 +1,12 @@
 package com.bob.mall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.bob.mall.product.entity.SkuInfoEntity;
 import com.bob.mall.product.service.SkuInfoService;
@@ -53,6 +50,12 @@ public class SkuInfoController {
 		SkuInfoEntity skuInfo = skuInfoService.getById(skuId);
 
         return R.ok().put("skuInfo", skuInfo);
+    }
+
+    @GetMapping("/saleAttrs/{skuId}")
+    public List<String> getSkuSaleAttrs(@PathVariable("skuId") Long skuId){
+        List<String> list = skuInfoService.getSkuSaleAttrs(skuId);
+        return list;
     }
 
     /**

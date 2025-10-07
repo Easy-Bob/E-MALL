@@ -168,5 +168,11 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
         return vo;
     }
 
+    @Override
+    public List<String> getSkuSaleAttrs(Long skuId)
+    {
+        return this.skuInfoDao.getSkuSaleAttrs(skuId);
+    }
+
 
 }

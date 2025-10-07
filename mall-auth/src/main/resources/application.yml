@@ -1,0 +1,32 @@
+server:
+    port: 8110
+    servlet:
+        session:
+            cookie:
+                name: SESSION
+                domain: .bob.com   # 注意有个点，表示所有子域共享
+
+spring:
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 192.168.101.65:8848
+#                ip: 168.4.77.65 # public local net, needs to be modified constantly
+                port: 8110
+    application:
+        name: mall-auth
+    # Server 2 Client date format
+    jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+    thymeleaf:
+        cache: false    # 关闭thymeleaf的缓存
+    redis:
+        host: 192.168.101.65
+        port: 6379
+    session:
+        store-type: redis
+        redis:
+            namespace: spring:session
+client_id: "27362073345-3ordjakond2ch0spi61266oecalgu78b.apps.googleusercontent.com"
+client_secret: "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"
+redirect_uri: "http://auth.bob.com/oauth/google/success"

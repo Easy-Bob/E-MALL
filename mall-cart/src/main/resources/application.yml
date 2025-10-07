@@ -1,0 +1,40 @@
+server:
+    port: 8120
+    servlet:
+        session:
+            cookie:
+                name: SESSION
+                domain: .bob.com   # 注意有个点，表示所有子域共享
+            timeout: 3000
+
+spring:
+    datasource:
+        url: jdbc:mysql://192.168.101.65:3306/mall-oms?useSSL=false&serverTimezone=UTC
+        username: root
+        password: 123456
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 192.168.101.65:8848
+#                ip: 168.5.60.208 # public local net, needs to be modified constantly
+                port: 8120
+    application:
+        name: mall-cart
+    thymeleaf:
+        cache: false
+    redis:
+        host: 192.168.101.65
+        port: 6379
+    session:
+        store-type: redis
+        redis:
+            namespace: spring:session
+mybatis-plus:
+    mapper-locations: classpath*:/mapper/**/*.xml
+    global-config:
+        db-config:
+            id-type: auto
+
+
+
