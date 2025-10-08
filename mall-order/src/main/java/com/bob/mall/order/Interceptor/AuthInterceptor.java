@@ -1,4 +1,4 @@
-package com.bob.mall.cart.Interceptor;
+package com.bob.mall.order.Interceptor;
 
 import com.bob.common.constant.AuthConstant;
 import com.bob.common.vo.MemberVO;
@@ -19,7 +19,6 @@ public class AuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // 通过HttpSession获取当前登录的用户信息
-
         HttpSession session = request.getSession();
         Object attribute = session.getAttribute(AuthConstant.AUTH_SESSION_REDIS);
         if(attribute != null){

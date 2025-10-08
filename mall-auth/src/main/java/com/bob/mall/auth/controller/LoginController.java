@@ -25,6 +25,7 @@ public class LoginController {
         R r = memberFeginService.login(loginVo);
         if(r.getCode() == 0){
             MemberVO memberVO = new MemberVO();
+            memberVO.setId(1l);
             memberVO.setUsername("bob_user");
             // 表示登录成功
             session.setAttribute(AuthConstant.AUTH_SESSION_REDIS, memberVO);

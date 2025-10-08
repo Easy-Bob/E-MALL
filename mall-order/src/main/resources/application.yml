@@ -1,5 +1,11 @@
 server:
     port: 8030
+    servlet:
+        session:
+            cookie:
+                name: SESSION
+                domain: .bob.com   # 注意有个点，表示所有子域共享
+            timeout: 3000
 
 spring:
     datasource:
@@ -15,7 +21,13 @@ spring:
                 port: 8030
     application:
         name: mall-order
-
+    redis:
+        host: 192.168.101.65
+        port: 6379
+    session:
+        store-type: redis
+        redis:
+            namespace: spring:session
 mybatis-plus:
     mapper-locations: classpath*:/mapper/**/*.xml
     global-config:

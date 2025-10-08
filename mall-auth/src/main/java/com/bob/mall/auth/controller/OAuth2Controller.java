@@ -85,6 +85,7 @@ public class OAuth2Controller {
         }
 //        System.out.println(socialUser);
         MemberVO vo = new MemberVO();
+        vo.setId(2l);
         vo.setUsername(socialUser.getName());
         session.setAttribute(AuthConstant.AUTH_SESSION_REDIS, vo);
 
