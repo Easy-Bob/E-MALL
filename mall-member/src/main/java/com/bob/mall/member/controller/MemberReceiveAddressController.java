@@ -30,8 +30,10 @@ public class MemberReceiveAddressController {
     @GetMapping("/{memberId}/address")
     public List<MemberReceiveAddressEntity> getAddress(@PathVariable("memberId") Long memberId){
         return memberReceiveAddressService.getAddress(memberId);
-
     }
+
+
+
 
     /**
      * 列表
@@ -54,6 +56,13 @@ public class MemberReceiveAddressController {
 		MemberReceiveAddressEntity memberReceiveAddress = memberReceiveAddressService.getById(id);
 
         return R.ok().put("memberReceiveAddress", memberReceiveAddress);
+    }
+
+    @RequestMapping("/getAddressById/{id}")
+    //@RequiresPermissions("member:memberreceiveaddress:info")
+    public MemberReceiveAddressEntity getAddressById(@PathVariable("id") Long id){
+        MemberReceiveAddressEntity memberReceiveAddress = memberReceiveAddressService.getById(id);
+        return memberReceiveAddress;
     }
 
     /**

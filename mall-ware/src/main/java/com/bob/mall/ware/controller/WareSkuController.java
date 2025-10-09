@@ -6,12 +6,12 @@ import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import com.bob.common.dto.SkuHasStockDto;
+import com.bob.common.exception.BizCodeEnume;
+import com.bob.common.exception.NoStockExecption;
+import com.bob.mall.ware.vo.LockStockResult;
+import com.bob.mall.ware.vo.WareSkuLockVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.bob.mall.ware.entity.WareSkuEntity;
 import com.bob.mall.ware.service.WareSkuService;
@@ -31,6 +31,16 @@ import com.bob.common.utils.*;
 public class WareSkuController {
     @Autowired
     private WareSkuService wareSkuService;
+
+    @PostMapping("/lock/order")
+    public R orderLockStock(@RequestBody WareSkuLockVO vo){
+        try{
+            Boolean flag = wareSkuService.orderLockStock(vo);
+        }catch(NoStockExecption e){
+            R.error(BizCodeEnume.NO_STOCK_EXCEPTION.getCode(), BizCodeEnume.NO_STOCK_EXCEPTION.getMsg());
+        }
+        return R.ok();
+    }
 
     /**
      * 查询对应的skuId是否有库存

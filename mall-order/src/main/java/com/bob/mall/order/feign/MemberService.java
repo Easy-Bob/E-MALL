@@ -1,9 +1,11 @@
 package com.bob.mall.order.feign;
 
+import com.bob.common.utils.R;
 import com.bob.mall.order.vo.MemberAddressVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -13,4 +15,7 @@ public interface MemberService {
     @GetMapping("/member/memberreceiveaddress/{memberId}/address")
     List<MemberAddressVo> getAddress(@PathVariable("memberId") Long memberId);
 
+
+    @RequestMapping("/member/memberreceiveaddress/getAddressById/{id}")
+    MemberAddressVo getAddressById(@PathVariable("id") Long id);
 }

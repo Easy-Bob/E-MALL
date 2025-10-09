@@ -1,5 +1,6 @@
 package com.bob.mall.product.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.bob.common.constant.ProductConstant;
 import com.bob.common.dto.MemberPrice;
@@ -321,6 +322,30 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         }else{
             // 远程调用失败
         }
+    }
+
+    @Override
+    public List<OrderItemSpuInfoVO> getOrderItemSpuInfoBySpuId(Long[] spuIds) {
+        List<OrderItemSpuInfoVO> list = new ArrayList<>();
+        for (Long spuId : spuIds) {
+            OrderItemSpuInfoVO vo = new OrderItemSpuInfoVO();
+            SpuInfoEntity spuInfoEntity = this.getById(spuId);
+            vo.setId(spuId);
+            vo.setSpuName(spuInfoEntity.getSpuName());
+            vo.setBrandId(spuInfoEntity.getBrandId());
+            vo.setCatalogId(spuInfoEntity.getCatalogId());
+            // 根据品牌编号查询品牌信息
+            BrandEntity brand = brandService.getById(spuInfoEntity.getBrandId());
+            vo.setBrandName(brand.getName());
+            CategoryEntity category = categoryService.getById(spuInfoEntity.getCatalogId());
+            vo.setCatalogName(category.getName());
+            // 获取SPU的图片
+            SpuInfoDescEntity descEntity = spuInfoDescService.getById(spuId);
+            vo.setImg(descEntity.getDecript());
+            list.add(vo);
+        }
+
+        return list;
     }
 
     /**

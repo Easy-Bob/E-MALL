@@ -5,6 +5,8 @@ import com.bob.common.utils.PageUtils;
 import com.bob.mall.order.entity.OrderEntity;
 import com.bob.mall.order.feign.ProductService;
 import com.bob.mall.order.vo.OrderConfirmVo;
+import com.bob.mall.order.vo.OrderResponseVO;
+import com.bob.mall.order.vo.OrderSubmitVO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
@@ -24,5 +26,6 @@ public interface OrderService extends IService<OrderEntity> {
     OrderConfirmVo confirmOrder();
 
 
+    OrderResponseVO submitOrder(OrderSubmitVO vo);
 }
 
