@@ -7,6 +7,8 @@ server:
                 domain: .bob.com   # 注意有个点，表示所有子域共享
             timeout: 3000
 spring:
+    main:
+        allow-circular-references: true
     datasource:
         url: jdbc:mysql://192.168.101.65:3306/mall-ums?useSSL=false&serverTimezone=UTC
         username: root

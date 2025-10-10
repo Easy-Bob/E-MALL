@@ -5,6 +5,8 @@ server:
             cookie:
                 domain: .bob.com    # ← note the leading dot
 spring:
+    main:
+        allow-circular-references: true
     cloud:
         nacos:
             discovery:

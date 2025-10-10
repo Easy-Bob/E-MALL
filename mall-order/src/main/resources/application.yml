@@ -8,6 +8,8 @@ server:
             timeout: 3000
 
 spring:
+    main:
+        allow-circular-references: true
     datasource:
         url: jdbc:mysql://192.168.101.65:3306/mall-oms?useSSL=false&serverTimezone=UTC
         username: root
@@ -19,6 +21,9 @@ spring:
                 server-addr: 192.168.101.65:8848
 #                ip: 168.5.60.208 # public local net, needs to be modified constantly
                 port: 8030
+        alibaba:
+            seata:
+                tx-service-group: mall-order-group
     application:
         name: mall-order
     redis:
@@ -33,6 +38,11 @@ mybatis-plus:
     global-config:
         db-config:
             id-type: auto
-
+rocketmq:
+    name-server: 192.168.101.65:9876
+    producer:
+        group: order-producer
+    consumer:
+        group: order-consumer
 
 

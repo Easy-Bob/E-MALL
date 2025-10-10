@@ -5,6 +5,8 @@ server:
             cookie:
                 domain: .bob.com    # ← note the leading dot
 spring:
+    main:
+        allow-circular-references: true
     datasource:
         url: jdbc:mysql://192.168.101.65:3306/mall-wms?useSSL=false&serverTimezone=UTC
         username: root
@@ -16,6 +18,9 @@ spring:
                 server-addr: 192.168.101.65:8848
 #                ip: 168.5.59.205 # public local net, needs to be modified constantly
                 port: 8050
+        alibaba:
+            seata:
+                tx-service-group: mall-ware-group
     application:
         name: mall-ware
 
@@ -24,4 +29,3 @@ mybatis-plus:
     global-config:
         db-config:
             id-type: auto
-

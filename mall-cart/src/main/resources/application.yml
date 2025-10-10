@@ -8,6 +8,8 @@ server:
             timeout: 3000
 
 spring:
+    main:
+        allow-circular-references: true
     datasource:
         url: jdbc:mysql://192.168.101.65:3306/mall-oms?useSSL=false&serverTimezone=UTC
         username: root

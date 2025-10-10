@@ -13,7 +13,9 @@ import com.bob.mall.order.feign.MemberService;
 import com.bob.mall.order.feign.ProductService;
 import com.bob.mall.order.feign.WareService;
 import com.bob.mall.order.service.OrderItemService;
+import com.bob.mall.order.utils.OrderMsgProducer;
 import com.bob.mall.order.vo.*;
+//import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -72,6 +74,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
     @Autowired
     private OrderItemService orderItemService;
 
+    @Autowired
+    private OrderMsgProducer orderMsgProducer;
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<OrderEntity> page = this.page(
@@ -127,6 +132,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
 
     private Lock lock = new ReentrantLock();
 
+
+    /**
+     * Seata分布式事务管理
+     * @param vo
+     * @return
+     */
     @Transactional
     @Override
     public OrderResponseVO submitOrder(OrderSubmitVO vo) {
@@ -174,6 +185,19 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
 
         // 4. 锁定库存信息
         // 订单号 SKU_ID SKU_NAME 商品数量
+        lockWareSku(responseVO, orderCreateTO);
+
+        // 5. 同步更新用户的会员积分
+
+        // 订单成功后，给消息中间件发送延迟30s的关单消息
+        orderMsgProducer.sendOrderMessage(orderCreateTO.getOrderEntity().getOrderSn());
+
+        return responseVO;
+
+
+    }
+
+    private void lockWareSku(OrderResponseVO responseVO, OrderCreateTO orderCreateTO){
         WareSkuLockVO wareSkuLockVO = new WareSkuLockVO();
         wareSkuLockVO.setOrderSN(orderCreateTO.getOrderEntity().getOrderSn());
         List<OrderItemVo> orderItemVos = orderCreateTO.getOrderItemEntitys().stream().map(item -> {
@@ -193,9 +217,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
             responseVO.setCode(2);
             throw new NoStockExecption(100000l);
         }
-        return responseVO;
-
-
     }
 
     private void saveOrder(OrderCreateTO orderCreateTO) {
