@@ -2,7 +2,7 @@
 
 ### Architecture
 
-![](./images/emall architecture.png)
+![](./images/emallarchitecture.png)
 
 #### Front-end:
 
