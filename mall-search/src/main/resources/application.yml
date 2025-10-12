@@ -13,6 +13,14 @@ spring:
                 server-addr: 192.168.101.65:8848
 #                ip: 168.5.59.205 # public local net, needs to be modified constantly
                 port: 8100
+        sentinel:
+            transport:
+                #                client-ip: 192.168.101.1
+                dashboard: 192.168.101.65:8858
+                port: 8719
+            log:
+                dir: /data/logs/sentinel
+
     application:
         name: mall-search
     # Server 2 Client date format
@@ -20,6 +28,12 @@ spring:
         date-format: yyyy-MM-dd HH:mm:ss
     thymeleaf:
         cache: false
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include: '*'
 
 
 

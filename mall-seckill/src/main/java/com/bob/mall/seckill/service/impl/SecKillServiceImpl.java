@@ -1,5 +1,9 @@
 package com.bob.mall.seckill.service.impl;
 
+import com.alibaba.csp.sentinel.Entry;
+import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.alibaba.fastjson.JSON;
 import com.bob.common.constant.OrderConstant;
 import com.bob.common.constant.SeckillConstant;
@@ -14,6 +18,7 @@ import com.bob.mall.seckill.service.SecKillService;
 import com.bob.mall.seckill.vo.SeckillSessionEntity;
 import com.bob.mall.seckill.vo.SeckillSkuRelationEntity;
 import com.bob.mall.seckill.vo.SkuInfoVo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.redisson.api.RSemaphore;
@@ -33,6 +38,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class SecKillServiceImpl implements SecKillService {
 
@@ -72,32 +78,42 @@ public class SecKillServiceImpl implements SecKillService {
      * 查询当前时间内的秒杀活动及对应的商品sku信息
      * @return
      */
+    @SentinelResource(value = "currentSecKillSkusResources")
     @Override
     public List<SeckillSkuRedisDto> getCurrentSecKillSkus() {
         // 1. 确定当前时间 对应的秒杀活动
         long time = new Date().getTime();
-        // 2. 从redis中查询所有秒杀活动
-        Set<String> keys = redisTemplate.keys(SeckillConstant.SESSION_CHACE_PREFIX + "*");
-        for (String key : keys) {
-            String replace = key.replace(SeckillConstant.SESSION_CHACE_PREFIX, "");
 
-            String[] startEnd = replace.split("_");
-            Long start = Long.parseLong(startEnd[0]);
-            Long end = Long.parseLong(startEnd[1]);
+        try(Entry entry = SphU.entry("getCurrentSecKillSkusResources")){
+            // 被保护的资源
+            // 2. 从redis中查询所有秒杀活动
+            Set<String> keys = redisTemplate.keys(SeckillConstant.SESSION_CHACE_PREFIX + "*");
+            for (String key : keys) {
+                String replace = key.replace(SeckillConstant.SESSION_CHACE_PREFIX, "");
 
-            if(time >= start && time <= end){
-                List<String> range = redisTemplate.opsForList().range(key, 0, -1);
-                BoundHashOperations<String, String, String> ops = redisTemplate.boundHashOps(SeckillConstant.SKU_CHACE_PREFIX);
-                List<String> list = ops.multiGet(range);
-                if(list != null && !list.isEmpty()){
-                    List<SeckillSkuRedisDto> collect = list.stream().map(item -> {
-                        SeckillSkuRedisDto dto = JSON.parseObject(item, SeckillSkuRedisDto.class);
-                        return dto;
-                    }).collect(Collectors.toList());
-                    return collect;
+                String[] startEnd = replace.split("_");
+                Long start = Long.parseLong(startEnd[0]);
+                Long end = Long.parseLong(startEnd[1]);
+
+                if(time >= start && time <= end){
+                    List<String> range = redisTemplate.opsForList().range(key, 0, -1);
+                    BoundHashOperations<String, String, String> ops = redisTemplate.boundHashOps(SeckillConstant.SKU_CHACE_PREFIX);
+                    List<String> list = ops.multiGet(range);
+                    if(list != null && !list.isEmpty()){
+                        List<SeckillSkuRedisDto> collect = list.stream().map(item -> {
+                            SeckillSkuRedisDto dto = JSON.parseObject(item, SeckillSkuRedisDto.class);
+                            return dto;
+                        }).collect(Collectors.toList());
+                        return collect;
+                    }
                 }
             }
+        }catch(BlockException ex){
+            // 限流/降级 处理
+            log.error("getCurrentSecKillSkus Stop running.");
         }
+
+
         return null;
     }
 

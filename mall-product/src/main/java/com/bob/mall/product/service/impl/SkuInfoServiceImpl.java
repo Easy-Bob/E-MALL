@@ -18,6 +18,7 @@ import com.bob.mall.product.vo.SpuItemGroupAttrVo;
 import com.bob.mall.product.vo.SpuItemVO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -51,6 +52,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
     private SkuSaleAttrValueService skuSaleAttrValueService;
 
     @Autowired
+    @Qualifier("com.bob.mall.product.feign.SeckillFeignService")
     private SeckillFeignService seckillFeignService;
 
     @Autowired
@@ -174,11 +176,13 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
         CompletableFuture<Void> seckillFuture = CompletableFuture.runAsync(() -> {
             // 查询商品的秒杀活动
             R r = seckillFeignService.getSeckillSessionBySkuId(skuId);
+            if(r.getCode() == 0){
+                Object data = r.get("data");
+                SeckillVO seckillVO = JSON.parseObject(data.toString(), SeckillVO.class);
 
-            Object data = r.get("data");
-            SeckillVO seckillVO = JSON.parseObject(data.toString(), SeckillVO.class);
+                vo.setSeckillVO(seckillVO);
+            }
 
-            vo.setSeckillVO(seckillVO);
         }, threadPoolExecutor);
 
 
