@@ -37,6 +37,13 @@ spring:
             - Path=/renren-fast/product/**
           filters:
             - RewritePath=/renren-fast/(?<segment>/?.*), /$\{segment}
+        #         coupon
+        - id: coupon_route
+          uri: lb://mall-coupon
+          predicates:
+            - Path=/renren-fast/coupon/**
+          filters:
+            - RewritePath=/renren-fast/(?<segment>/?.*), /$\{segment}
 #          aws s3
         - id: third_route
           uri: lb://mall-third-party
@@ -77,3 +84,7 @@ spring:
           uri: lb://mall-order
           predicates:
             - Host=order.bob.com
+        - id: bobmall_host_route7
+          uri: lb://mall-seckill
+          predicates:
+            - Host=seckill.bob.com

@@ -16,6 +16,7 @@
         <module name="mall-commons" />
         <module name="mall-coupon" />
         <module name="mall-cart" />
+        <module name="mall-seckill" />
         <module name="mall-third-party" />
         <module name="renren-fast" />
         <module name="mall-order" />

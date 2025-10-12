@@ -2,13 +2,13 @@
 
 ### Architecture
 
-![E-MALL Architecture](./images/architecture.png)
+![](./images/emall architecture.png)
 
 #### Front-end:
 
 ​	 VUE: Based on renren-fast-vue-master
 
-​	Thymeleaf: Page Rendering
+​	Thymeleaf: Page Rendering		
 
 #### Routing & Gateway:
 
@@ -18,7 +18,7 @@
 
 ​	Spring Cloud Alibaba Nacos
 
-#### Back-end:
+#### Back-end: 
 
 ​	renren-fast-master: (Info(product, ware, user) Management)
 
@@ -26,9 +26,9 @@
 
 ​	Spring Cloud(Alibaba) 2021.x: OpenFeign ...
 
-​	Spring Security
+​	Seata
 
-​	MyBatis Plus 3.x(MySQL Manipulation Tool)
+​	RocketMQ
 
 #### DataBase:
 
@@ -38,14 +38,24 @@
 
 ​	ElasticSearch(& Kibana)
 
+​	MyBatis Plus 3.x(MySQL Manipulation Tool)
+
 #### DevOps & Cloud:
 
-​	Docker
+​	Docker  
 
-​	AWS: EC2, S3      
+​	Sentinel
+
+​	SkyWalking
+
+​	AWS: EC2, S3        
 
 
-###### (This repository is for educational purposes only. If any content infringes on your rights, please contact me to have it removed.)
+
+### WorkFlow Demo
 
 
 
+Promotion Activity (Able to handle visits in a short time and resolve high concurrency order problems)
+
+<img src="./images/redisPromoProduct.png" style="width:700%;">

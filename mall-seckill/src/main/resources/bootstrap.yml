@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: mall-seckill
+  cloud:
+    nacos:
+      config:
+        server-addr: 192.168.101.65:8848
+        namespace: f329c3d5-827d-428b-bbce-50356888dcaa
+        file-extension: yaml
+#        group: prod

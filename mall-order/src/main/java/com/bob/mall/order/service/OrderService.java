@@ -2,6 +2,7 @@ package com.bob.mall.order.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.bob.common.utils.PageUtils;
+import com.bob.mall.order.dto.SeckillOrderDto;
 import com.bob.mall.order.entity.OrderEntity;
 import com.bob.mall.order.feign.ProductService;
 import com.bob.mall.order.vo.OrderConfirmVo;
@@ -27,5 +28,8 @@ public interface OrderService extends IService<OrderEntity> {
 
 
     OrderResponseVO submitOrder(OrderSubmitVO vo);
+
+    void quickCreateOrder(SeckillOrderDto seckillOrderDto);
+
 }
 

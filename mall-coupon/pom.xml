@@ -46,7 +46,11 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
             <version>2021.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.83</version>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

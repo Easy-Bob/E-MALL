@@ -1,0 +1,41 @@
+server:
+    port: 8130
+    servlet:
+        session:
+            cookie:
+                domain: .bob.com    # ← note the leading dot
+spring:
+    main:
+        allow-circular-references: true
+    cloud:
+        nacos:
+            discovery:
+                server-addr: 192.168.101.65:8848
+#                ip: 168.5.59.205 # public local net, needs to be modified constantly
+                port: 8130
+        alibaba:
+            seata:
+                tx-service-group: mall-seckill-group
+    application:
+        name: mall-seckill
+    redis:
+        host: 192.168.101.65
+        port: 6379
+    session:
+        store-type: redis
+        redis:
+            namespace: spring:session
+    task:
+        execution:
+            pool:
+                core-size: 5
+                max-size: 20
+    thymeleaf:
+        cache: false
+rocketmq:
+    name-server: 192.168.101.65:9876
+    producer:
+        group: seckill-producer
+    consumer:
+        group: seckill-consumer
+

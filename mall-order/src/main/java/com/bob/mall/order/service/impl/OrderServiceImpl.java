@@ -7,6 +7,7 @@ import com.bob.common.utils.PageUtils;
 import com.bob.common.vo.MemberVO;
 import com.bob.mall.order.Interceptor.AuthInterceptor;
 import com.bob.mall.order.dto.OrderCreateTO;
+import com.bob.mall.order.dto.SeckillOrderDto;
 import com.bob.mall.order.entity.OrderItemEntity;
 import com.bob.mall.order.feign.CartService;
 import com.bob.mall.order.feign.MemberService;
@@ -195,6 +196,26 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
         return responseVO;
 
 
+    }
+
+    @Transactional
+    @Override
+    public void quickCreateOrder(SeckillOrderDto seckillOrderDto) {
+        OrderEntity orderEntity = new OrderEntity();
+        orderEntity.setOrderSn(seckillOrderDto.getOrderSN());
+        orderEntity.setStatus(OrderConstant.OrderStateEnum.FOR_THE_PAYMENT.getCode());
+        orderEntity.setMemberId(seckillOrderDto.getMemberId());
+        orderEntity.setTotalAmount(seckillOrderDto.getSeckillPrice().multiply(new BigDecimal(seckillOrderDto.getNum())));
+        this.save(orderEntity);
+
+        OrderItemEntity itemEntity = new OrderItemEntity();
+        itemEntity.setOrderSn(seckillOrderDto.getOrderSN());
+        itemEntity.setSkuPrice(seckillOrderDto.getSeckillPrice());
+        itemEntity.setSkuId(seckillOrderDto.getSkuId());
+        itemEntity.setRealAmount(seckillOrderDto.getSeckillPrice().multiply(new BigDecimal(seckillOrderDto.getNum())));
+        itemEntity.setSkuQuantity(seckillOrderDto.getNum());
+
+        orderItemService.save(itemEntity);
     }
 
     private void lockWareSku(OrderResponseVO responseVO, OrderCreateTO orderCreateTO){

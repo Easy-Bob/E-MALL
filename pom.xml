@@ -22,6 +22,7 @@
     </properties>
 
     <modules>
+        <module>mall-seckill</module>
         <module>mall-auth</module>
         <module>mall-search</module>
         <module>mall-third-party</module>
