@@ -653,12 +653,12 @@
 
                         </div>
                     </div>
-                    <div class="box-btns-two" th:if="${#dates.createNow().getTime() < item.seckillVO.startTime}">
+                    <div class="box-btns-two" th:if="${item.seckillVO == null || #dates.createNow().getTime() < item.seckillVO.startTime}">
                         <a href="#" id="addCart" th:attr="skuId=${item.info.skuId}">
                             Cart
                         </a>
                     </div>
-                    <div class="box-btns-two" th:if="${#dates.createNow().getTime() >= item.seckillVO.startTime && #dates.createNow().getTime() <= item.seckillVO.endTime}">
+                    <div class="box-btns-two" th:if="${item.seckillVO != null && #dates.createNow().getTime() >= item.seckillVO.startTime && #dates.createNow().getTime() <= item.seckillVO.endTime}">
                         <a href="#" id="secKill" th:attr="skuId=${item.info.skuId}, sessionId=${item.seckillVO.promotionSessionId}, code=${item.seckillVO.randCode}">
                             Flash Sale!
                         </a>
