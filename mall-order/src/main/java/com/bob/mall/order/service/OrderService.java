@@ -8,6 +8,7 @@ import com.bob.mall.order.feign.ProductService;
 import com.bob.mall.order.vo.OrderConfirmVo;
 import com.bob.mall.order.vo.OrderResponseVO;
 import com.bob.mall.order.vo.OrderSubmitVO;
+import com.bob.mall.order.vo.PayVo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Map;
@@ -31,5 +32,10 @@ public interface OrderService extends IService<OrderEntity> {
 
     void quickCreateOrder(SeckillOrderDto seckillOrderDto);
 
+    PayVo getPayVo(String orderSn);
+
+    void updateOrderStatus(String orderSn, Integer status);
+
+    void handleOrderComplete(String orderSn, int code);
 }
 

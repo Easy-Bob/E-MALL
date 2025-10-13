@@ -27,5 +27,9 @@
         <result property="giftGrowth" column="gift_growth"/>
     </resultMap>
 
+    <select id="getByOrderSn" resultType="com.bob.mall.order.entity.OrderItemEntity">
+        select * from oms_order_item where order_sn = #{orderSn}
+    </select>
+
 
 </mapper>

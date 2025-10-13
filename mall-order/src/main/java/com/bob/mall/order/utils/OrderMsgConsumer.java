@@ -17,6 +17,6 @@ public class OrderMsgConsumer implements RocketMQListener<String> {
 
     @Override
     public void onMessage(String s) {
-        System.out.println("收到的消息: " + s);
+
     }
 }

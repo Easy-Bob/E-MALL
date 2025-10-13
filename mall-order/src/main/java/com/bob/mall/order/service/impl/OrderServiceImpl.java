@@ -69,8 +69,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
     @Autowired
     private StringRedisTemplate redisTemplate;
 
-//    @Autowired
-//    private OrderService orderService;
 
     @Autowired
     private OrderItemService orderItemService;
@@ -216,6 +214,33 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
         itemEntity.setSkuQuantity(seckillOrderDto.getNum());
 
         orderItemService.save(itemEntity);
+    }
+
+    @Override
+    public PayVo getPayVo(String orderSn) {
+        OrderEntity orderEntity = this.getBaseMapper().getOrderByOrderSn(orderSn);
+        PayVo payVo = new PayVo();
+        payVo.setOut_trader_no(orderSn);
+        payVo.setTotal_amount(orderEntity.getTotalAmount());
+        payVo.setSubject(orderSn);
+        payVo.setBody(orderSn);
+
+        return payVo;
+    }
+
+    @Override
+    public void updateOrderStatus(String orderSn, Integer status) {
+        this.getBaseMapper().updateOrderStatus(orderSn, status);
+    }
+
+    @Override
+    public void handleOrderComplete(String orderSn, int code) {
+        this.updateOrderStatus(orderSn, code);
+        // 更新库存
+
+        // 移除购物车商品
+
+        // 更新会员积分
     }
 
     private void lockWareSku(OrderResponseVO responseVO, OrderCreateTO orderCreateTO){

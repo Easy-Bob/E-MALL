@@ -67,7 +67,7 @@
                 <div class="m succeed-box">
                     <div class="mc success-cont" th:if="${orderSN != null}">
                         <h1>CONGRATULATIONS! #ORDER: [[${orderSN}]] </h1>
-                        <a href="#">Go Pay</a>
+                        <a th:href="@{'http://order.bob.com/orderPay?orderSn=' + ${orderSN}}">Go Pay</a>
                     </div>
 
                     <div class="mc success-cont" th:if="${orderSN == null}">

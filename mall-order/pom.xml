@@ -88,6 +88,16 @@
             <version>4.9.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.stripe</groupId>
+            <artifactId>stripe-java</artifactId>
+            <version>24.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.10.1</version>  <!-- or 2.9.1 -->
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>

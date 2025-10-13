@@ -49,5 +49,12 @@
         <result property="modifyTime" column="modify_time"/>
     </resultMap>
 
+    <select id="getOrderByOrderSn" resultType="com.bob.mall.order.entity.OrderEntity">
+        select * from oms_order where order_sn = #{orderSn}
+    </select>
+
+    <select id="updateOrderStatus">
+        update `oms_order` set status = #{status} where order_sn = #{orderSn}
+    </select>
 
 </mapper>

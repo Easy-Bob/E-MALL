@@ -26,4 +26,9 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemDao, OrderItemEnt
         return new PageUtils(page);
     }
 
+    @Override
+    public OrderItemEntity getByOrderSn(String orderSn) {
+        return this.getBaseMapper().getByOrderSn(orderSn);
+    }
+
 }

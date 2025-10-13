@@ -88,20 +88,27 @@
               <p>请输入6位数字支付密码</p>
               <input type="password"><span>忘记支付密码？</span>
             </li>
-            <li>
-              <button>立即支付</button>
-            </li>
+            <form action="/orderPay" method="post">
+              <input type="hidden" name="orderSn" th:value="${orderResponseVO.orderEntity.orderSn}">
+              <li>
+                <input type="submit" value="Pay">
+              </li>
+            </form>
           </ul>
         </div>
       </div>
       <div class="Jd_footer">
         <ul>
           <li>
-            <img src="/static/order/pay/img\weixin.png" alt="">微信支付
+            <img src="/static/order/pay/img\stripe.png" alt="">
+            <a th:href="'/orderPay?orderSn=' + ${orderResponseVO.orderEntity.orderSn}">Stripe Pay</a>
+<!--            <a href="#" onclick="payWithStripe('${orderResponseVO.orderEntity.orderSn}', ${orderResponseVO.orderEntity.totalAmount * 100})">Stripe Pay</a>-->
           </li>
-		  <li>
-            <img src="/static/order/pay/img\zhifubao.png" style="weight:auto;height:30px;" alt="">支付宝
-          </li>
+
+
+<!--		  <li>-->
+<!--            <img src="/static/order/pay/img\zhifubao.png" style="weight:auto;height:30px;" alt="">支付宝-->
+<!--          </li>-->
         </ul>
       </div>
       <div class="Jd_foots">
@@ -169,5 +176,21 @@
     }).mouseout(function(){
       $(this).css({"color":"black"})
     })
+
+    // stripe pay
+    async function payWithStripe(orderId, amount) {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId: orderId, amount: amount })  // amount in cents
+      });
+
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;  // Redirect to Stripe Checkout
+      } else {
+        alert("Payment failed to start");
+      }
+    }
   </script>
 </html>

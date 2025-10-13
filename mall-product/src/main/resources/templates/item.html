@@ -653,16 +653,28 @@
 
                         </div>
                     </div>
-                    <div class="box-btns-two" th:if="${item.seckillVO == null || #dates.createNow().getTime() < item.seckillVO.startTime}">
+
+                    <!-- Flash Sale Button -->
+                    <div class="box-btns-two"
+                         th:if="${item.seckillVO != null
+            && #dates.createNow().getTime() >= item.seckillVO.startTime
+            && #dates.createNow().getTime() <= item.seckillVO.endTime}">
+                        <a href="#" id="secKill"
+                           th:attr="skuId=${item.info.skuId}, sessionId=${item.seckillVO.promotionSessionId}, code=${item.seckillVO.randCode}">
+                            Flash Sale!
+                        </a>
+                    </div>
+
+                    <!-- Default to Cart -->
+                    <div class="box-btns-two"
+                         th:unless="${item.seckillVO != null
+                && #dates.createNow().getTime() >= item.seckillVO.startTime
+                && #dates.createNow().getTime() <= item.seckillVO.endTime}">
                         <a href="#" id="addCart" th:attr="skuId=${item.info.skuId}">
                             Cart
                         </a>
                     </div>
-                    <div class="box-btns-two" th:if="${item.seckillVO != null && #dates.createNow().getTime() >= item.seckillVO.startTime && #dates.createNow().getTime() <= item.seckillVO.endTime}">
-                        <a href="#" id="secKill" th:attr="skuId=${item.info.skuId}, sessionId=${item.seckillVO.promotionSessionId}, code=${item.seckillVO.randCode}">
-                            Flash Sale!
-                        </a>
-                    </div>
+
                     <div class="box-btns-three">
                         <img src="/static/item/img/e4ed3606843f664591ff1f68f7fda12d.png" alt="" /> 分享
                     </div>
